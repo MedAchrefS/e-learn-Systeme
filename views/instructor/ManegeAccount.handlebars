@@ -1,0 +1,87 @@
+
+<h2>Manage Account</h2>
+
+		<div class="portfoliocard">
+		<div class="coverphoto">
+      
+    </div>
+		<div class="profile_picture">
+       <img style="border-radius: 80%; max-height: 100px; min-width: 80px; " src="/images/{{user_object.username}}.jpg" alt="avatar">
+    </div>
+		<div class="left_col">
+			<div class="followers">
+				<div class="follow_count">18,541</div>
+				Followers
+			</div>
+			<div class="following">
+				<div class="follow_count">181</div>
+				Following
+			</div>
+		</div>
+		<div class="right_col">
+			<h2 class="name">{{instructor.first_name}}</h2>
+			<h3 class="location"> {{instructor.last_name}}</h3>
+             
+			<ul class="contact_information">
+				<li class="work">adresse</li>
+				<li class="website"><a class="nostyle" href="#">{{instructor.adresse.[0].street_address}}</a></li>
+				<li class="mail">{{instructor.adresse.[0].city}}</li>
+				<li class="phone">{{instructor.adresse.[0].state}}</li>
+             
+				<li class="resume"><a href="#" class="nostyle">{{instructor.adresse.[0].zip}}</a></li>
+                   <li class="mail">{{instructor.email}}</li>
+			</ul>
+           
+		</div>
+		</div>
+
+        <div class="container">
+  <form action="/{{user}}s/manage" method="POST" enctype="multipart/form-data">
+    <div class="row">
+      <h4>Account</h4>
+      <div class="input-group input-group-icon">
+        <input type="text" name="instructor_username" value="{{instructor.username}}" placeholder="{{instructor.username}}"/>
+        <div class="input-icon"><i class="fa fa-user"></i></div>
+      </div>
+      <div class="input-group input-group-icon">
+        <input type="email" name="instructor_email" value="{{instructor.email}}" placeholder="{{instructor.email}}"/>
+        <div class="input-icon"><i class="fa fa-envelope"></i></div>
+      </div>
+       
+     
+    </div>
+    <div class="row">
+     
+          <div class="row">
+            <input type="date" name="date">
+          </div>
+          <div class="row">
+             <input type="file" name="avatar" />
+          </div>
+      <div class="col-half">
+        <h4>Gender</h4>
+        <div class="input-group">
+
+          <input type="radio" name="gender" value="male" {{#if male}} checked {{/if}} id="gender-male"/>
+          <label for="gender-male">Male</label>
+          <input type="radio" name="gender" {{#if female}} checked {{/if}} value="female" id="gender-female"/>
+          <label for="gender-female">Female</label>
+   
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <h4>Terms and Conditions</h4>
+      <div class="input-group">
+        <input type="checkbox" id="terms"/>
+        <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
+      </div>
+    </div>
+
+    <div class="constainer">
+        <input type="submit"  class="red" name="submit" >
+    </div>
+  </form>
+</div>
+	        

@@ -1,0 +1,28 @@
+<h2>Add new Classes</h2>
+
+      <form action="/{{user}}s/classes/new" method="POST">
+            <label for="title">title :</label>
+            <br>
+            <input type="text" name="title">
+             <br>
+            <label for="description">description :</label>
+             <br>
+            <input type="text" name="description">
+             <br>
+            <input type="hidden" name="instructor" value="{{user}}">
+            
+            <label for="lesson_number">lesson number :</label>
+             <br>
+            <input type="text" name="lesson_number" >
+             <br>
+             <label for="lesson_title">lesson title :</label>
+              <br>
+             <input type="text" name="lesson_title" >
+              <br>
+              <label for="lesson_body">lesson body :</label>
+               <br>
+              <input type="text" name="lesson_body" >
+
+             <br>
+            <input type="submit" name="submit" class="button red pill" >
+        </form>

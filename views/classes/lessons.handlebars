@@ -1,0 +1,25 @@
+    <h2>   {{class.title}} 's Classes lessons </h2>
+
+    <table cellspacing="0" cellpadding="0"> 
+        <thead> 
+            <tr>
+                <th>Lesson Id</th>
+                <th>Lesson Title</th>
+                <th>lesson body</th>
+           
+                <th></th>
+               
+            </tr>
+        </thead>
+        <tbody> 
+            {{#each class.lessons}}
+                <tr>
+                    <td>{{lesson_number}}</td>
+                    <td> {{lesson_title}}</td>
+                    <td> {{lesson_body}}</td>
+                    <td><a href="/classes/{{class_id}}/lessons/{{lesson_number}}">View Lesson</a></td>
+                   
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
