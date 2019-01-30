@@ -1,12 +1,12 @@
 
 <h2>Manage Account</h2>
-
+<form action="/{{user}}s/manage" method="POST" enctype="multipart/form-data">
 		<div class="portfoliocard">
 		<div class="coverphoto">
       
     </div>
 		<div class="profile_picture">
-       <img style="border-radius: 80%; max-height: 100px; min-width: 80px; " src="/images/{{user_object.username}}.jpg" alt="avatar">
+       <img name="avatar" style="border-radius: 20%; max-height: 140px; min-width: 130px;  " src="/images/avatars/{{avatar}}" alt="avatar">
     </div>
 		<div class="left_col">
 			<div class="followers">
@@ -36,7 +36,7 @@
 		</div>
 
         <div class="container">
-  <form action="/{{user}}s/manage" method="POST" enctype="multipart/form-data">
+  
     <div class="row">
       <h4>Account</h4>
       <div class="input-group input-group-icon">

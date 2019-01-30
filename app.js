@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var exphbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
@@ -24,6 +25,11 @@ var students = require('./routes/students');
 var instructors = require('./routes/instructors');
 
 var app = express();
+// parse application/json
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

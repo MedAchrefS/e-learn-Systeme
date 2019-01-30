@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bcryptjs": "*",
+    "body-parser": "^1.18.3",
     "bootstrap": "^3.4.0",
     "connect-flash": "*",
     "cookie-parser": "~1.4.3",

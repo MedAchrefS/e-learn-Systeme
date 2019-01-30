@@ -31,6 +31,9 @@ var InstructorSchema= mongoose.Schema({
     }],
     gender:{
         type:String
+    },
+    avater_name:{
+        type:String
     }
 });
 
@@ -59,11 +62,19 @@ module.exports.register=function(info,callback){
 module.exports.manage=function(info,callback){
     instructor_username= info['instructor_username'];
     email=info['instructor_email'];
+
     old_user=user_object.username;
 
     gender=info['gender'];
+    avater_name=info['avatar'];
+    console.log(instructor_username);
+    console.log(email);
+    console.log(old_user);
+    console.log(gender);
+    console.log('////////////////////////');
+   
     Instructor.findOneAndUpdate(
-        { username: old_user }, { username: instructor_username, gender:gender },
+        { username: old_user }, { username: instructor_username, gender:gender, email:email, avater_name:avater_name },
         {new: true},
         (err, doc) => {
             if (err) {
@@ -77,7 +88,7 @@ module.exports.manage=function(info,callback){
 
    
     User.findOneAndUpdate(
-        { username: old_user }, { username: instructor_username },
+        { username: old_user }, { username: instructor_username,email:email },
         {new: true},
         (err, doc) => {
             if (err) {
