@@ -1,21 +1,41 @@
 var express = require('express');
 var router = express.Router();
-
+var path = require('path');
 Class = require('../models/class');
 Instructor = require('../models/instructor');
 User = require('../models/user');
 
+// Multer files and image consiguration && destination
+
 const multer= require('multer');
+
+// generate string
+
+var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 16; i++)
+	text += possible.charAt(Math.floor(Math.random() * possible.length));
+	text+="-"+ Date.now();
 
 const  storage=multer.diskStorage({
 	destination:function(req,file,callback){
 		callback(null, './public/images/avatars');
 	},
 	filename: function(req,file,callback){
-		callback(null, user_object.username + '-' + Date.now());
+		callback(null, user_object.username+ '-' + Date.now()+path.extname(file.originalname));
+	}
+});
+const file_storage=multer.diskStorage({
+	destination:function(req,file,callback){
+		callback(null, './public/files/lessons');
+	},
+	filename: function(req,file,callback){
+		callback(null, text + path.extname(file.originalname));
 	}
 });
 const upload= multer({storage:storage});
+const upload_file= multer({storage:file_storage});
 
 router.get('/classes', function(req, res, next){
 	Instructor.getInstructorByUsername(req.user.username, function(err, instructor){
@@ -39,17 +59,30 @@ router.post('/classes/register', function(req, res){
 	res.redirect('/instructors/classes');
 });
 
+// nouveau lesson GET Runder function
 router.get('/classes/:id/lessons/new', function(req, res, next){
-	res.render('instructors/newlesson',{class_id:req.params.id});
+	res.render('instructor/newlesson',{class_id:req.params.id});
 });
 
-router.post('/classes/:id/lessons/new', function(req, res, next){
+	// nouveau lesson post function
+router.post('/classes/:id/lessons/new',upload_file.single('lesson_file'), function(req, res, next){
 	// Get Values
 	var info = [];
 	info['class_id'] = req.params.id;
 	info['lesson_number'] = req.body.lesson_number;
 	info['lesson_title'] = req.body.lesson_title;
 	info['lesson_body'] = req.body.lesson_body;
+	info['lesson_file']=text;
+
+	console.log('************');
+	console.log(info['lesson_number']);
+	console.log(info['lesson_title']);
+	console.log(text);
+	console.log('************');
+
+
+	
+	
 
 	Class.addLesson(info, function(err, lesson){
 		console.log('Lesson Added..');
@@ -57,7 +90,9 @@ router.post('/classes/:id/lessons/new', function(req, res, next){
 
 	req.flash('success_msg','Lesson Added');
 	res.redirect('/instructors/classes');
+
 });
+
 
 // manage Function get
 router.get('/manage', function(req, res, next){

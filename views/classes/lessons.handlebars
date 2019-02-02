@@ -6,6 +6,7 @@
                 <th>Lesson Id</th>
                 <th>Lesson Title</th>
                 <th>lesson body</th>
+                <th>  Lesson File  </th>
            
                 <th></th>
                
@@ -17,8 +18,9 @@
                     <td>{{lesson_number}}</td>
                     <td> {{lesson_title}}</td>
                     <td> {{lesson_body}}</td>
-                    <td><a href="/classes/{{class_id}}/lessons/{{lesson_number}}">View Lesson</a></td>
-                   
+                     
+                    <td><a href="/classes/{{_id}}/lessons/{{lesson_number}}">View Lesson File</a></td>
+                    <a href="/classes/ttt/{{_id}}/lesson/{{lesson_number}}">ttt</a>
                 </tr>
             {{/each}}
         </tbody>

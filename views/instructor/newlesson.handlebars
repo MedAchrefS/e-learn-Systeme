@@ -1,6 +1,9 @@
 <h2>Add Lessions</h2>
 
-<form id="regForm" method="post" action="/instructors/classes/{{class_id}}/lessons/new">
+<form 
+	id="regForm" method="post"
+    action="/instructors/classes/{{class_id}}/lessons/new"
+	enctype="multipart/form-data">
 	
 	<div>
 		<label>Lesson number: </label>
@@ -17,7 +20,12 @@
 		<textarea type="text" name="lesson_body"></textarea>
 	</div><br />
 
-
+	<div class="block">
+		<label for="">Upload a File :</label>
+		 <div class="row">
+             <input type="file" name="lesson_file" />
+          </div>
+	</div>
 	
 	<div>
 		<input type="submit" value="ADD Lesson ">

@@ -30,6 +30,15 @@ router.get('/:id/lessons', function(req, res, next) {
 	});
 });
 
+// lessons detail
+router.get('/ttt/:id/lesson/:lesson_id', function(req, res, next) {
+	Class.getClassById([req.params.id],function(err, classname){
+        if(err)throw err;
+		res.render('classes/lessons', { class: classname });
+	});
+	
+
+});
 
 
 module.exports = router;
