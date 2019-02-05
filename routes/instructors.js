@@ -118,7 +118,7 @@ router.get('/manage', function(req, res, next){
 router.post('/manage',upload.single('avatar'), function(req, res){
 	console.log(req.file);
 	info = [];
-	info['instructor_username'] = req.user.username;
+	info['instructor_username'] = req.body.instructor_username;
 	info['instructor_email']= req.body.instructor_email;
 	info['gender']=req.body.gender;
 	info['avatar']= req.file.filename;
