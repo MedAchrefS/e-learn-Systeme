@@ -1,0 +1,18 @@
+<h2>Update Classe {{class_.title}}</h2>
+
+      <form action="/{{user}}s/classes/{{class_._id}}/update" method="POST">
+            <label for="title">title :</label>
+            <br>
+            <input type="text" name="title" placeholder="old title is: {{class_.title}}" value="{{class_.title}}">
+             <br>
+            <label for="description">description :</label>
+             <br>
+            <input type="text" name="description" placeholder="old description is : {{class_.description}}" value="{{class_.description}}" >
+             <br>
+            <input type="hidden" name="instructor" value="{{user}}">
+            
+      
+        
+            
+            <input type="submit" name="submit" class="button red pill" >
+        </form>

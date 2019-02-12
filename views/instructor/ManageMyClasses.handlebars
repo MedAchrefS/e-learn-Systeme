@@ -1,0 +1,27 @@
+<h2>   {{user_object.username}} 's Classes </h2>
+
+   
+   
+    <table cellspacing="0" cellpadding="0"> 
+        <thead> 
+            <tr>
+                <th>Class Id</th>
+                <th>Class Name</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody> 
+            {{#each class_}}
+                <tr>
+                    <td>{{title}}</td>
+                    <td> {{description}}</td>
+                     <td><a href="/instructors/classes/{{_id}}/update">Update Class</a></td>
+                    <td><a href="/instructors/classes/{{_id}}/lessons">Manage Lessons</a></td>
+                    <td><a href="/instructors/classes/{{_id}}/lessons/new">Add Lessons</a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+   

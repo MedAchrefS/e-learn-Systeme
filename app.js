@@ -83,6 +83,15 @@ app.use(flash());
     if(req.user){
         res.locals.user= req.user.user;
         res.locals.user_object=req.user;
+        res.locals.instructor_var=null;
+        if(req.user.user=="instructor")
+        {
+          res.locals.instructor_var="var";
+
+        }else{
+          res.locals.instructor_var=null;
+         
+        }
     }
     next();
   });

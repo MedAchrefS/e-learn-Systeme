@@ -1,0 +1,43 @@
+body {
+    background: #fff;
+    color: #333;
+    font-family: "Varela Round", sans-serif;
+  }
+  
+  span {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 0 0 0;
+  }
+  
+  .instructions {
+    height: 100px;
+    padding: 0 0 20px 0;
+  }
+  
+  .temperature, .done {
+    font-size: 40px;
+  }
+  
+  .game {
+    height: 480px;
+    width: 520px;
+    background-color: #ddd;
+    margin: 0 auto;
+  }
+  
+  .board {
+    height: 300px;
+    width: 496px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
+  
+  .board div {
+    width: 50%;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+  }
+  

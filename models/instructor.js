@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
 User=require('./user');
 
+Class_i = require('./class');
+
 
 // Instructor schema
 var InstructorSchema= mongoose.Schema({
@@ -42,6 +44,15 @@ var Instructor= module.exports= mongoose.model('Instructor',InstructorSchema);
 module.exports.getInstructorByUsername=function(username, callback){
     var query={username: username};
     Instructor.findOne(query, callback);
+}
+// classes created by the instructor
+module.exports.getInstructorclasses=function(username, callback){
+    var query={username: username};
+    Instructor.findOne(query);
+
+    var query2={instructor: username};
+    Class_i.find(query2,callback);
+
 }
 
 //Register Instructor for a class

@@ -37,13 +37,44 @@ const file_storage=multer.diskStorage({
 const upload= multer({storage:storage});
 const upload_file= multer({storage:file_storage});
 
+// afficher les classes
 router.get('/classes', function(req, res, next){
 	Instructor.getInstructorByUsername(req.user.username, function(err, instructor){
 		if(err) throw err;
-		res.render('instructor/classes', {instructor: instructor});
+		instructor_var=true;
+		res.render('instructor/classes', {instructor: instructor,instructor_var:instructor_var});
 	});
 });
 
+// creeer un nouveau class get
+router.get('/classes/new', function(req, res, next){
+	
+		res.render('instructor/newclasses');
+
+});
+
+// creer un nouveau class function post
+router.post('/classes/new', function(req, res, next){
+	info = [];
+	
+	info['title'] = req.body.title;
+	info['description'] = req.body.description;
+	info['instructor'] =user_object.username;
+	info['lesson_number'] = req.body.lesson_number;
+	info['lesson_title'] = req.body.lesson_title;
+	info['lesson_body'] = req.body.lesson_body;
+
+console.log(req.body.lesson_number+": dans le controller");
+
+	Class.saveClass(info,function(err, class_new){
+		if(err) throw err;
+		req.flash('success_msg', 'Your class Hase been Created');
+		res.redirect('/instructors/classes');
+	});
+	res.redirect('/instructors/classes');
+
+});
+// inscrire pour un class fonction post
 router.post('/classes/register', function(req, res){
 	info = [];
 	info['instructor_username'] = req.user.username;
@@ -137,5 +168,42 @@ router.post('/manage',upload.single('avatar'), function(req, res){
 });
 
 
+
+// manage My Classes page Function get
+router.get('/manage_classes', function(req, res, next){
+	Instructor.getInstructorclasses(req.user.username, function(err, class_){
+		if(err) throw err;
+	
+		res.render('instructor/ManageMyClasses', {class_: class_});
+	});
+
+});
+
+// Update My Classes Function get
+
+router.get('/classes/:id/update', function(req, res, next){
+	Class.getClassById(req.params.id,function(err,class_){
+		if(err) throw err;
+		instructor_var=true;
+		res.render('instructor/updateClass', {class_: class_,instructor_var:instructor_var});
+	});
+	
+});
+// Update My class function Post
+router.post('/classes/:id/update', function(req, res, next){
+
+	title=req.body.title;
+	description=req.body.description;
+	info=[];
+	info['id']=req.params.id;
+	info['title']=title;
+	info['description']=description;
+	Class.UpdateClass(info,function(err,class_){
+	
+	});
+	req.flash('success_msg', 'Your Modification Hase been Saved');
+	res.redirect('/instructors/classes');
+	
+});
 
 module.exports = router;

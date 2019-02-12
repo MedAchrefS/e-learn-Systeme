@@ -31,9 +31,24 @@
 		<ul class="menu">
 			<li class="current"><a href="/">Home</a></li>
 			<li><a href="/classes">Classes</a></li>
+			<li><a href="/games/snake"> Snake</a></li>
+			<li><a href="/games/Math"> Math</a></li>
+			<li><a href="/games/Memory">Memory Game</a></li>
+		
+			<li><a href="/games/worm_cool">worm_cool</a></li>
+			
 			{{#if user_object}}
 			<li><a href=""> {{user_object.username}} le username</a></li>
 			{{/if}}
+			<li style="float: right;margin-right: 50px;">
+
+				<form action="/search" method="POST" style="float: right">
+					<input  type="search" name="searchkey" placeholder="Search">
+					<input type="submit" value="search">
+				</form>
+				
+			</li>
+			
 			</ul>
 
 
@@ -80,8 +95,6 @@
 
 <!-- ===================================== START FOOTER ===================================== -->
 <div class="clear"></div>
-<div id="footer">
-&copy; Copyright 2019 All Rights Reserved Elearn</a>
-</div>
+
 
 </body></html>
