@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Class= require('../models/class');
-
+var Instructor=require('../models/instructor');
 /*classes page . */
 
 router.get('/', function(req, res, next) {
@@ -15,9 +15,15 @@ router.get('/', function(req, res, next) {
 // classes detail
 router.get('/:id/details', function(req, res, next) {
 	Class.getClassById([req.params.id],function(err, classname){
-        if(err)throw err;
-		res.render('classes/details', { class: classname });
+		if(err)throw err;
+		Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
+			
+			res.render('classes/details', { class: classname, instructor:instructor });
+		})
+		
+		
 	});
+
 });
 
 // lessons detail

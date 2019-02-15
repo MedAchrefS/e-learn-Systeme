@@ -12,6 +12,10 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.get('/games', function(req, res, next) {
+	
+	res.render('Games/GamesLayout');
+});
 router.get('/games/snake', function(req, res, next) {
 	
 		res.render('Games/Snake');
@@ -37,6 +41,7 @@ router.get('/games/math_game', function(req, res, next) {
 	
 	res.render('Games/math_game');
 });
+
 
 router.post('/search', function(req, res, next) {
 	console.log("achrefssssssssssssssssssssssssss");

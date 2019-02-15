@@ -35,53 +35,63 @@
 		</div>
 		</div>
 
-        <div class="container">
+
+
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">User Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="instructor_username" value="{{instructor.username}}" placeholder="{{instructor.username}}">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" name="instructor_email" value="{{instructor.email}}" placeholder="{{instructor.email}}">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Date naissance</label>
+    <div class="col-sm-6">
+      <input type="date" name="date" class="form-control" >
+    </div>
+  </div>
+
   
-    <div class="row">
-      <h4>Account</h4>
-      <div class="input-group input-group-icon">
-        <input type="text" name="instructor_username" value="{{instructor.username}}" placeholder="{{instructor.username}}"/>
-        <div class="input-icon"><i class="fa fa-user"></i></div>
-      </div>
-      <div class="input-group input-group-icon">
-        <input type="email" name="instructor_email" value="{{instructor.email}}" placeholder="{{instructor.email}}"/>
-        <div class="input-icon"><i class="fa fa-envelope"></i></div>
-      </div>
-       
-     
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Avatar</label>
+    <div class="col-sm-3">
+      <input type="file" name="avatar" class="form-control" >
     </div>
+  </div>
+  <fieldset class="form-group">
     <div class="row">
-     
-          <div class="row">
-            <input type="date" name="date">
-          </div>
-          <div class="row">
-             <input type="file" name="avatar" />
-          </div>
-      <div class="col-half">
-        <h4>Gender</h4>
-        <div class="input-group">
-
-          <input type="radio" name="gender" value="male" {{#if male}} checked {{/if}} id="gender-male"/>
-          <label for="gender-male">Male</label>
-          <input type="radio" name="gender" {{#if female}} checked {{/if}} value="female" id="gender-female"/>
-          <label for="gender-female">Female</label>
-   
+      <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="male" {{#if male}} checked {{/if}} id="gender-male">
+          <label class="form-check-label" for="gridRadios1">
+           Male
+          </label>
         </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" {{#if female}} checked {{/if}} value="female" id="gender-female">
+          <label class="form-check-label" for="gridRadios2">
+            Female
+          </label>
+        </div>
+      
       </div>
     </div>
-    
-    <div class="row">
-      <h4>Terms and Conditions</h4>
-      <div class="input-group">
-        <input type="checkbox" id="terms"/>
-        <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
-      </div>
+  </fieldset>
+  
+
+ <div class="constainer">
+        <input type="submit"  class="btn btn-primary" name="submit" >
     </div>
 
-    <div class="constainer">
-        <input type="submit"  class="red" name="submit" >
-    </div>
+
+
   </form>
 </div>
 	        

@@ -7,3 +7,45 @@
 			  learn new corses with us, learn new corses with us</p>
 				<a class="button" href="/users/register">Sign up for free</a>
 				<p>You nead to sign up to register for a free Classes</p>
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+		
+    <li data-target="#demo"  class="active"></li>
+
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+	
+  <div class="carousel-inner">
+{{#each classes}}
+    <div class="carousel-item active">
+      <img src="https://forums.oscommerce.com/uploads/monthly_04_2016/post-336856-0-18918000-1459704022.jpg" alt="Los Angeles" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Class title : {{title}}</h3>
+        <p>We had such a great time in LA!</p>
+      </div>   
+    </div>
+	
+   	{{/each}}
+  </div>
+	
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+{{#each classes}}
+
+
+
+
+ Class title : {{title}}
+  {{description}}
+    <a  href="/classes/{{_id}}/details" class="button orange" class="btn btn-primary"><i class="fa fa-plus-square"></i>View Class</a>
+  </div>
+</div>
+
+{{/each}}

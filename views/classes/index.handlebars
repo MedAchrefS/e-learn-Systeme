@@ -1,11 +1,12 @@
 <h2>Classes</h2>
 {{#each classes}}
-<div class="block">
-    <h3>{{title}}</h3>
-    <p>
-        {{description}}
-    </p>
-    <p>Instructor: <strong>{{instructor}}</strong> </p>
-    <a class="button" href="/classes/{{_id}}/details">Class Details</a>
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://www.google.com/webmasters/images/learn/webmaster-academy.svg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Class title : {{title}}</h5>
+    <p class="card-text">{{description}}.</p>
+    <a  href="/classes/{{_id}}/details" class="button orange" class="btn btn-primary"><i class="fa fa-plus-square"></i>View Class</a>
+  </div>
 </div>
 {{/each}}
