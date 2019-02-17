@@ -16,11 +16,29 @@ router.get('/', function(req, res, next) {
 router.get('/:id/details', function(req, res, next) {
 	Class.getClassById([req.params.id],function(err, classname){
 		if(err)throw err;
-		Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
+		console.log('+++++++0'+classname.reactions);
+
+		Class.countlikes(req.params.id,function(err,x){
+			if(err)throw err;
+			var likes=0;
+	
+			for (var i = 0; i < x.reactions.length; i++) {
+				var currentAccount = x.reactions[i];
+			   console.log("/////////"+currentAccount.emot);
+			   console.log("/////////"+currentAccount.user_id);
+			   if(currentAccount.emot=="like")
+			   likes=likes+1;
+			   
+			   console.log(likes+" :like are");
+			}
+			console.log("like final sont: "+likes);
+			Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
 			
-			res.render('classes/details', { class: classname, instructor:instructor });
-		})
-		
+				res.render('classes/details', { class: classname, instructor:instructor, likes: likes });
+			});
+			
+		});
+
 		
 	});
 
@@ -47,9 +65,9 @@ router.get('/ttt/:id/lesson/:lesson_number', function(req, res, next) {
 			}
 		res.render('classes/file', { class: classname ,lesson: lesson});
 	});
-	
-
 });
+
+
 
 
 module.exports = router;

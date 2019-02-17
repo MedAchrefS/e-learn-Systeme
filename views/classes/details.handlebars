@@ -1,24 +1,96 @@
-<h2>{{class.title}}</h2>
- <p>Instructor: <strong>{{class.instructor}}</strong> </p>
- <img src="/images/avatars/{{instructor.avater_name}}" alt="" style="width: 200px;height: 200px">
 
- {{instructor.email}}
- <p>
-      {{class.description}}
- </p>
- <ul class="alt">
-     {{#each class.lessons}}
-            <li>{{lesson_title}}</li>
-     {{/each}}
- </ul>
+<div class="jumbotron">
+
+<h2>this Class Information :</h2>
+
+<table class="table">
+
+ <tr>
+  <td>  <center style="padding-top: 20px;"> {{instructor.email}}</center></td>
+  <th></th>
+  <th></th>
+  <th></th>
+ </tr>
+ <tr>
+  <th rowspan="4"><center><img src="/images/avatars/{{instructor.avater_name}}" alt="" style=" border-radius: 50%; width: 150px;height: 150px"></center></th>
+  <th></th>
+  
+  <td><h3>Class Title:</h3></td>    
+  <td rowspan="4"><h3> {{class.title}}</h3></td>
+ </tr>
+ <tr>
+  <th></th>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+  
+  <th></th>
+  <td></td>
+  <td></td>
+ </tr>
+ <tr>
+ 
+  <td></td>
+  <td></td>
+ </tr>
+</table>
+
+  <hr class="my-4">
+  <p>  {{class.description}}.</p>
+
+<center>
+    <div class="list-group"  style="width: 500px;">
+        
+    <button type="button" class="list-group-item list-group-item-action active">
+    List Of Lessons
+    </button>
+    
+        {{#each class.lessons}}
+            <button type="button" class="list-group-item list-group-item-action">{{lesson_title}}</button>
+        {{/each}}
+    
+    </div >
+</center>
+ 
+    
  {{#if user}}
         <form action="/{{user}}s/classes/register" id="classRegForm" method="POST">
-            <input type="text" name="student_id" value="{{user}}">
-            <input type="text" name="class_id" value="{{class._id}}">
-            <input type="text" name="class_title" value="{{class.title}}">
-            <input type="submit" class="button" value="Register for this Class">
+            <input type="hidden" name="student_id" value="{{user}}">
+            <input type="hidden" name="class_id" value="{{class._id}}">
+            <input type="hidden" name="class_title" value="{{class.title}}">
+            <p class="lead" style="padding-top: 20px;">
+            <input type="submit" class="btn btn-primary btn-lg" value="Register for this Class">
+            </p>
+           
+           
         </form>
+
+        <!-- ++++++++++++++++++ Like or Dislike Form ++++++++++++++ -->
+
+                <form method="POST" action="/like_class" style ='float: left; padding: 5px;'>
+                    <input type="hidden" name="user_id" value="{{user_object._id}}">
+                    <input type="hidden" name="class_id" value="{{class._id}}">
+                     <input type="submit" class="btn btn-light btn-lg"
+                    style="background-image: url('https://img.icons8.com/color/48/000000/heart-health.png'); width: 50px;" 
+                    value="" id="">{{likes}}
+                </form>
+                <form style ='float: left; padding: 5px;'>    
+                    <input type="submit" class="btn btn-light btn-lg" 
+                    style="background-image: url('https://img.icons8.com/color/48/000000/dislike.png'); width: 50px;"  
+                    value="" id="">0
+                </form>
+        
  {{else}}
     <p>You must be logged in to view the lessons</p>
     
  {{/if}}
+           
+               
+              
+       
+
+</div>
+
+
+

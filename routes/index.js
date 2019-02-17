@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Class= require('../models/class');
+var Instructor=require('../models/instructor');
 
 /* GET home page. */
 
@@ -54,6 +55,25 @@ router.post('/search', function(req, res, next) {
 		
 	},10);
 
+});
+
+router.post('/like_class',function(req,res,next){
+	user_id=req.body.user_id;
+	class_id=req.body.class_id;
+
+	info=[];
+	info['user_id']=user_id;
+	info['class_id']=class_id;
+		
+			 Class.like_class(info,function(err,class_){
+				if(err)throw err;
+				
+				res.redirect('/classes/'+class_id+'/details');
+				
+			 })
+	
+	
+	
 });
 
 module.exports = router;

@@ -20,6 +20,12 @@ var ClassSchema= mongoose.Schema({
             lesson_body:{type: String},
             lesson_file:{type: String}
         }
+    ],
+    reactions:[
+        {
+            emot:{type:String},
+            user_id:{type:String}
+        }
     ]
 })
 var Class= module.exports= mongoose.model('Class',ClassSchema);
@@ -39,6 +45,12 @@ module.exports.getsearchedClasses = function(searchkey,callback, limit){
 // Fetch Single Class
 module.exports.getClassById = function(id, callback){
 	Class.findById(id, callback);
+}
+module.exports.countlikes=function(id,x){
+   
+    Class.findOne({ _id: id },x);
+     
+    
 }
 // create lessons
 module.exports.addLesson = function(info, callback){
@@ -64,8 +76,6 @@ module.exports.addLesson = function(info, callback){
 
 module.exports.saveClass=function(infoclass){
 console.log('achref');
-
-
         Class.title=infoclass['title'];
         Class.description=infoclass['description'];
         Class.instructor=infoclass['instructor'];
@@ -93,8 +103,6 @@ console.log('achref');
                     lesson_body:infoclass['lesson_body']
                 }
             ]
-            
-
         });
 
         newClass.save(function(error){
@@ -115,11 +123,23 @@ module.exports.UpdateClass=function(info, callback){
                         function(err, callback){
                             if(err){
                                 console.log(err);
-                            }
-                           
+                            }            
              });
-
 }
 
+module.exports.like_class=function(info,callback){
+    console.log(info['class_id']);
+    console.log(info['user_id']+"+++++++++++");
+
+    Class.findByIdAndUpdate(
+        info['class_id'],
+        {$push:{"reactions":{ emot:"like",
+                              user_id:info['user_id']
+                             } } },
+        {safe: true, upsert: true},
+        callback
+    );
+
+}
 
 

@@ -6,10 +6,17 @@
 
 	<link rel="stylesheet" type="text/css" href="/stylesheets/layout_style.css" media="all" />   
 	
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+	
 	<link rel="icon" type="image/gif" href="https://img.icons8.com/color/48/000000/e-learning.png" sizes="20x20" />
 	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,23 +42,29 @@
       <li class="nav-item">
         <a class="nav-link" href="/games">Play Our Games</a>
       </li>
-	  {{#if user_object}}
-		{{#if instructor_var}}
-			<li class="nav-item">
-			<a  class="nav-link" href="/{{user}}s/manage_classes">Manage My Classes</a> 
-			</li>
-			<li class="nav-item">
-			<a  class="nav-link" href="/{{user}}s/classes/new">new My Classes</a> 
-			</li>
-		{{/if}}
-		<li class="nav-item">
-		 <a  class="nav-link" href="/{{user}}s/classes">My Registered Classes</a> 
-		</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/{{user}}s/manage">Manage Account</a>
-		</li>
+
+		{{#if user_object}}
 		
-	  {{/if}}
+			<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					{{#if instructor_var}}
+         <a   href="/{{user}}s/manage_classes" > Manage My Classes</a>
+				   <div class="dropdown-divider"></div>
+				 	<a  href="/{{user}}s/classes/new"> Create Classes</a> 
+					   <div class="dropdown-divider"></div>
+					{{/if}}
+		 <a   href="/{{user}}s/classes"> My Registered Classes</a>          
+          <div class="dropdown-divider"></div>
+				<a  href="/{{user}}s/manage">ManageAccount</a>
+         
+        </div>
+      </li>
+ 		{{/if}}
+
+	 
 
 	  <li class="nav-item" style="padding-left: 150px">
 				<form action="/search" method="POST">
@@ -88,6 +101,10 @@
 	
   </div>
 </nav>
+
+
+
+
 
 <h3>{{user_object.username}}</h3>
  
@@ -154,8 +171,6 @@
 	</div>	
 </div>
 	
-
-
 
 
 
