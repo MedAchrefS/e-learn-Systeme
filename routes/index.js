@@ -59,21 +59,93 @@ router.post('/search', function(req, res, next) {
 
 router.post('/like_class',function(req,res,next){
 	user_id=req.body.user_id;
+	console.log(user_id+"yyyyyyyyyyyyyyyyyyyy");
 	class_id=req.body.class_id;
 
 	info=[];
 	info['user_id']=user_id;
 	info['class_id']=class_id;
+		Class.if_user_like_class(info,function(err,user_){
+			if(err)throw err;
+
+			console.log("**************");
+			console.log(user_);
+			console.log("**************");
+	
 		
-			 Class.like_class(info,function(err,class_){
-				if(err)throw err;
+				if(user_==null)
+				{
+					Class.like_class_new(info,function(err,class_){
+						if(err)throw err;
 				
-				res.redirect('/classes/'+class_id+'/details');
+					});
+					res.redirect('/classes/'+class_id+'/details');
+				}
+				else{
+					Class.like_class(info,function(err,class_){
+						if(err)throw err;
 				
-			 })
+					});
+					res.redirect('/classes/'+class_id+'/details');
+				}
+			
+			
+			
+		});
+
+			
 	
 	
+});
+router.post('/dislike_class',function(req,res,next){
+	user_id=req.body.user_id;
+	console.log(user_id+"yyyyyyyyyyyyyyyyyyyy");
+	class_id=req.body.class_id;
+	info=[];
+	info['user_id']=user_id;
+	info['class_id']=class_id;
+	Class.if_user_like_class(info,function(err,user_){
+		if(err)throw err;
+
+		console.log("**************");
 	
+				
+					if(user_==null)
+					{
+						Class.dislike_class_new(info,function(err,class_){
+							if(err) throw err;
+						});
+						res.redirect('/classes/'+class_id+'/details');
+
+					}else{
+						Class.dislike_class(info,function(err,class_){
+							if(err)throw err;
+					
+						});
+						res.redirect('/classes/'+class_id+'/details');
+	
+					}
+				});
+				
+	});
+router.post('/comment_class',function(req,res,next){
+	commentaire=req.body.comment_txt;
+	user_id=req.body.user_id;
+	class_id=req.body.class_id;
+	
+	date=Date.now();
+	
+	info=[];
+	info['user_id']=user_id;
+	info['class_id']=class_id;
+	info['commentaire']=commentaire;
+	info['date_commentaire']=date;
+	info['user_avatar']=user_object.avater_name;
+
+	Class.commentaire_class(info,function(err,class_){
+		if(err)throw err;
+	});
+	res.redirect('/classes/'+class_id+'/details'); 
 });
 
 module.exports = router;

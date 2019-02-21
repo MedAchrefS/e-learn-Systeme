@@ -75,11 +75,61 @@
                     style="background-image: url('https://img.icons8.com/color/48/000000/heart-health.png'); width: 50px;" 
                     value="" id="">{{likes}}
                 </form>
-                <form style ='float: left; padding: 5px;'>    
+                <form method="POST" action="/dislike_class" style ='float: left; padding: 5px;'>    
+                    <input type="hidden" name="user_id" value="{{user_object._id}}">
+                    <input type="hidden" name="class_id" value="{{class._id}}">
                     <input type="submit" class="btn btn-light btn-lg" 
                     style="background-image: url('https://img.icons8.com/color/48/000000/dislike.png'); width: 50px;"  
-                    value="" id="">0
+                    value="" id="">{{dislike}}
                 </form>
+
+
+        <!--*********************** comment Section********************* -->
+
+        <!--*********************** comment Section********************* -->
+
+<div class="comments">
+		<div class="comment-wrap">
+				<div class="photo">
+                    {{user_object.first_name}}
+						<div class="avatar" style="background-image: url('/images/avatars/{{user_avatar}}')"></div>
+				</div>
+				<div class="comment-block">
+						<form method="POST" action="/comment_class" >
+                                <input type="hidden" name="user_id" value="{{user_object._id}}">
+                                <input type="hidden" name="class_id" value="{{class._id}}">
+								<textarea class="texte_" name="comment_txt" id="" cols="30" rows="3" placeholder="Add your comment..."></textarea>
+                                <input style="float: right;" type="submit" class="btn btn-primary" value="Leave A Comment">
+                    	</form>
+				</div>
+		</div>
+
+
+       {{#each class.commentaire}}
+           
+           
+                <div class="comment-wrap">
+                        <div class="photo">
+                                <div class="avatar" style="background-image: url('/images/avatars/{{comment_avatar}}')"></div>
+                        </div>
+                        <div class="comment-block">
+                                <p class="comment-text">  {{commentaire_txt}}.</p>
+                                <div class="bottom-comment">
+                                        <div class="comment-date">{{date}}</div>
+                                        <ul class="comment-actions">
+                                                <li class="complain">Complain</li>
+                                                <li class="reply">Reply</li>
+                                                 
+                                        </ul>
+                                </div>
+                        </div>
+                </div>
+            
+         {{/each}}
+</div>
+
+</div>
+        
         
  {{else}}
     <p>You must be logged in to view the lessons</p>
@@ -91,6 +141,8 @@
        
 
 </div>
+
+ 
 
 
 

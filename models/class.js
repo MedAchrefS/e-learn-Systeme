@@ -26,6 +26,14 @@ var ClassSchema= mongoose.Schema({
             emot:{type:String},
             user_id:{type:String}
         }
+    ],
+    commentaire:[
+        {
+            commentaire_txt:{type:String},
+            user_id:{type:String},
+            date:{type:String},
+            comment_avatar:{type:String}
+        }
     ]
 })
 var Class= module.exports= mongoose.model('Class',ClassSchema);
@@ -133,13 +141,132 @@ module.exports.like_class=function(info,callback){
 
     Class.findByIdAndUpdate(
         info['class_id'],
+        {$set:{"reactions":{ emot:"like",
+                              user_id:info['user_id']
+                             } } },
+        {safe: true, upsert: true},
+        function(err,docs){
+
+            for (var i = 0; i < docs.reactions.length; i++) {
+                if (docs){
+                    console.log(docs.reactions[i].emot);
+                 }else{                
+                     console.log('Class exists: '+info['class_id']);
+                     next(new Error("Class exists!"));
+                 }
+            }
+           
+        }
+    );
+
+}
+
+
+module.exports.like_class_new=function(info,callback){
+    console.log(info['class_id']);
+    console.log(info['user_id']+"+++++++++++");
+
+    Class.findByIdAndUpdate(
+        info['class_id'],
         {$push:{"reactions":{ emot:"like",
                               user_id:info['user_id']
                              } } },
         {safe: true, upsert: true},
-        callback
+        function(err,docs){
+
+            for (var i = 0; i < docs.reactions.length; i++) {
+                if (docs){
+                    console.log(docs.reactions[i].emot);
+                 }else{                
+                     console.log('Class exists: '+info['class_id']);
+                     next(new Error("Class exists!"));
+                 }
+            }
+           
+        }
     );
 
+}
+
+
+module.exports.if_user_like_class=function(info,callback){
+    console.log(info['user_id']);
+    Class.findOne(
+        {"reactions.user_id": info['user_id']},
+         callback
+         );
+    
+}
+
+module.exports.dislike_class=function(info,callback){
+    console.log(info['user_id']+"// only Update dislike function!!");
+        Class.findByIdAndUpdate(
+            info['class_id'],
+            {$set:{"reactions":{ emot:"dislike",
+                                user_id:info['user_id']
+                                } } },
+            {safe: true, upsert: true},
+            function(err,docs){
+
+                for (var i = 0; i < docs.reactions.length; i++) {
+                    if (docs){
+                        console.log(docs.reactions[i].emot);
+                    }else{                
+                        console.log('Class exists: '+info['class_id']);
+                        next(new Error("Class exists!"));
+                    }
+                }
+            
+            }
+        );
+}
+module.exports.dislike_class_new=function(info,callback){
+    console.log(info['user_id']+"// dislike new not update function!!");
+        Class.findByIdAndUpdate(
+            info['class_id'],
+            {$push:{"reactions":{ emot:"dislike",
+                                user_id:info['user_id']
+                                } } },
+            {safe: true, upsert: true},
+            function(err,docs){
+
+                for (var i = 0; i < docs.reactions.length; i++) {
+                    if (docs){
+                        console.log(docs.reactions[i].emot);
+                    }else{                
+                        console.log('Class exists: '+info['class_id']);
+                        next(new Error("Class exists!"));
+                    }
+                }
+            
+            }
+        );
+}
+
+module.exports.commentaire_class=function(info,callback){
+    console.log(info['class_id']);
+    console.log(info['date_commentaire']);
+    Class.findByIdAndUpdate(
+        info['class_id'],
+        {$push:{"commentaire":{ commentaire_txt:info['commentaire'],
+                                user_id:info['user_id'],
+                                date:info['date_commentaire'],
+                                comment_avatar:info['user_avatar']
+                                } } },
+        {safe: true, upsert: true},
+        function(err,docs){
+
+            for (var i = 0; i < docs.commentaire.length; i++) {
+                if (docs){
+                    console.log(docs.commentaire[i].commentaire_txt);
+                }else{                
+                    console.log('Class exists: '+info['class_id']);
+                    next(new Error("Class exists!"));
+                }
+            }
+        
+        }
+    );
 }
 
 

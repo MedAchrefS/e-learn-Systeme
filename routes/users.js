@@ -113,7 +113,24 @@ passport.deserializeUser(function(id, done) {
     var usertype=req.user.user;
     user_object=req.user;
    console.log(usertype+' : ceci est le type');
-    res.redirect('/'+usertype+'s/classes');
+
+    if(usertype=="student"){
+      Student.getStudentByUserneme(req.user.username,function(err,student){
+          if(err)throw err;
+          student_object=student;
+          
+          res.redirect('/'+usertype+'s/classes');
+      });
+    }else{
+      Instructor.getInstructorByUsername(req.user.username,function(err,instructor){
+        if(err)throw err;
+        instructor_object=instructor;
+        
+        res.redirect('/'+usertype+'s/classes');
+    });
+      
+    }
+   
 
   });
 

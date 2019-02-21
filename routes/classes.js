@@ -3,6 +3,7 @@ var router = express.Router();
 
 var Class= require('../models/class');
 var Instructor=require('../models/instructor');
+var User=require('../models/user');
 /*classes page . */
 
 router.get('/', function(req, res, next) {
@@ -15,26 +16,28 @@ router.get('/', function(req, res, next) {
 // classes detail
 router.get('/:id/details', function(req, res, next) {
 	Class.getClassById([req.params.id],function(err, classname){
-		if(err)throw err;
-		console.log('+++++++0'+classname.reactions);
-
+	if(err)throw err;
+	
 		Class.countlikes(req.params.id,function(err,x){
 			if(err)throw err;
 			var likes=0;
-	
+			var dislike=0;
 			for (var i = 0; i < x.reactions.length; i++) {
 				var currentAccount = x.reactions[i];
-			   console.log("/////////"+currentAccount.emot);
-			   console.log("/////////"+currentAccount.user_id);
-			   if(currentAccount.emot=="like")
-			   likes=likes+1;
-			   
-			   console.log(likes+" :like are");
-			}
-			console.log("like final sont: "+likes);
-			Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
 			
-				res.render('classes/details', { class: classname, instructor:instructor, likes: likes });
+			   if(currentAccount.emot=="like")
+			  	   likes=likes+1;
+			   else
+				{
+					dislike=dislike+1;
+			   }
+			   console.log(dislike+" :like are");
+			}
+			Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
+				console.log("---**tatatatat*"+user_object.avater_name+"*tatata-----**");
+				user_avatar=user_object.avater_name;
+
+				res.render('classes/details', { class: classname, instructor:instructor, likes: likes,dislike: dislike, user_avatar:user_avatar });
 			});
 			
 		});

@@ -15,6 +15,12 @@ var UserSchema= mongoose.Schema({
     },
     user:{
         type:String
+    },
+    gender:{
+        type:String
+    },
+    avater_name:{
+        type:String
     }
 });
 

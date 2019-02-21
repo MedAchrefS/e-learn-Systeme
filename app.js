@@ -79,11 +79,14 @@ app.use(flash());
 // user object global variable
   app.get('*',function(req,res, next){
     res.locals.user=req.user||null;
-   
+    res.locals.student_object=req.student_object||null;
+    res.locals.instructor_object=req.instructor_object||null;
+  
     if(req.user){
         res.locals.user= req.user.user;
         res.locals.user_object=req.user;
         res.locals.instructor_var=null;
+       
         if(req.user.user=="instructor")
         {
           res.locals.instructor_var="var";

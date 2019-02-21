@@ -99,7 +99,7 @@ module.exports.manage=function(info,callback){
 
    
     User.findOneAndUpdate(
-        { username: old_user }, { username: instructor_username,email:email },
+        { username: old_user }, { username: instructor_username,email:email, gender:gender,avater_name:avater_name },
         {new: true},
         (err, doc) => {
             if (err) {
