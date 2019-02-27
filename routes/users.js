@@ -121,7 +121,10 @@ passport.deserializeUser(function(id, done) {
           
           res.redirect('/'+usertype+'s/classes');
       });
-    }else{
+    }else if(usertype=="admin"){
+      res.redirect('/'+usertype+'/index');
+    }
+    else{
       Instructor.getInstructorByUsername(req.user.username,function(err,instructor){
         if(err)throw err;
         instructor_object=instructor;

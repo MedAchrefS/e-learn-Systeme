@@ -23,6 +23,7 @@ var usersRouter = require('./routes/users');
 var classes = require('./routes/classes');
 var students = require('./routes/students');
 var instructors = require('./routes/instructors');
+var admin=require('./routes/admin');
 
 var app = express();
 // parse application/json
@@ -115,6 +116,7 @@ app.use('/users', usersRouter);
 app.use('/classes', classes);
 app.use('/students', students);
 app.use('/instructors', instructors);
+app.use('/admin',admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

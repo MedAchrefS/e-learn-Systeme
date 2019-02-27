@@ -191,10 +191,13 @@ module.exports.like_class_new=function(info,callback){
 
 module.exports.if_user_like_class=function(info,callback){
     console.log(info['user_id']);
-    Class.findOne(
+   /*  Class.findOne(
         {"reactions.user_id": info['user_id']},
-         callback
-         );
+         function(err,doc){
+            user_p=doc;
+            console.log(user_p);
+         }); */
+    Class.find({"reactions.user_id":info['user_id']}, callback);
     
 }
 
@@ -268,5 +271,20 @@ module.exports.commentaire_class=function(info,callback){
         }
     );
 }
+
+module.exports.countreactions=function(info,callback){
+     Class.aggregate([
+        {$match: {_id:info}},
+        { $group: {
+            "_id": "$reactions.emot",
+            "count": { "$sum": 1 },
+            
+        }},
+    
+    ],callback);  
+
+
+}
+
 
 

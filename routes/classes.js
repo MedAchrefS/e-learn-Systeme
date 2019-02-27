@@ -16,13 +16,14 @@ router.get('/', function(req, res, next) {
 // classes detail
 router.get('/:id/details', function(req, res, next) {
 	Class.getClassById([req.params.id],function(err, classname){
-	if(err)throw err;
-	
+		if(err)throw err;
+		
 		Class.countlikes(req.params.id,function(err,x){
 			if(err)throw err;
 			var likes=0;
 			var dislike=0;
-			for (var i = 0; i < x.reactions.length; i++) {
+			console.log("le x== "+x);
+			 for (var i = 0; i < x.reactions.length; i++) {
 				var currentAccount = x.reactions[i];
 			
 			   if(currentAccount.emot=="like")
@@ -32,7 +33,7 @@ router.get('/:id/details', function(req, res, next) {
 					dislike=dislike+1;
 			   }
 			   console.log(dislike+" :like are");
-			}
+			} 
 			Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
 				console.log("---**tatatatat*"+user_object.avater_name+"*tatata-----**");
 				user_avatar=user_object.avater_name;

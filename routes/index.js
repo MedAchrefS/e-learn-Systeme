@@ -67,13 +67,19 @@ router.post('/like_class',function(req,res,next){
 	info['class_id']=class_id;
 		Class.if_user_like_class(info,function(err,user_){
 			if(err)throw err;
-
-			console.log("**************");
+			console.log("//////////////////////");
 			console.log(user_);
-			console.log("**************");
-	
-		
-				if(user_==null)
+			console.log("//////////////////////");
+			user_react=false;
+			for (var i = 0; i < user_.length; i++) {
+					for(var j=0; j<user_[i].reactions.length;j++){
+							if(user_[i].reactions[j].user_id==info['user_id']){
+								user_react=true;
+							}
+					}
+			}
+			console.log("//////////////////////");
+				if(user_react==false)
 				{
 					Class.like_class_new(info,function(err,class_){
 						if(err)throw err;
@@ -106,11 +112,16 @@ router.post('/dislike_class',function(req,res,next){
 	info['class_id']=class_id;
 	Class.if_user_like_class(info,function(err,user_){
 		if(err)throw err;
-
-		console.log("**************");
-	
 				
-					if(user_==null)
+		user_react=false;
+		for (var i = 0; i < user_.length; i++) {
+				for(var j=0; j<user_[i].reactions.length;j++){
+						if(user_[i].reactions[j].user_id==info['user_id']){
+							user_react=true;
+						}
+				}
+		}
+					if(user_react==false)
 					{
 						Class.dislike_class_new(info,function(err,class_){
 							if(err) throw err;

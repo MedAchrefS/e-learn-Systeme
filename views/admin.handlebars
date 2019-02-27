@@ -1,0 +1,113 @@
+
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css" media="all" />   
+	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.0.1/jquery-migrate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+	
+	<link rel="icon" type="image/gif" href="https://img.icons8.com/color/48/000000/e-learning.png" sizes="20x20" />
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+<div class="header">
+  <a href="#" id="menu-action" style="padding-top: 10px;">
+    <i class="fa fa-bars"></i>
+    <span>Close</span>
+  </a>
+  <div class="logo">
+     Admin Dashbord
+     	<a style="float: right;"  class="btn btn-light" href="/users/logout"> logout</a>
+  </div>
+</div>
+<div class="sidebar">
+  <ul>
+    <li><a href="#"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
+    <li><a href="#"><i class="fa fa-server"></i><span>Classes</span></a></li>
+    <li><a href="#"><i class="fa fa-calendar"></i><span>Users</span></a></li>
+    <li><a href="#"><i class="fa fa-envelope-o"></i><span>Messages</span></a></li>
+    <li><a href="#"><i class="fa fa-table"></i><span>Data Table</span></a></li>
+</div>
+
+<!-- Content -->
+<div class="main">
+  <div class="hipsum">
+    <div class="jumbotron">
+      <h1 id="hello,-world!">Hello, world!<a class="anchorjs-link" href="#hello,-world!"><span class="anchorjs-icon"></span></a></h1>
+      <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+      <p><a class="btn btn-primary" href="#" role="button">Learn more</a></p>
+    </div>
+
+
+  </div>
+</div>
+<div style="margin-left: 150px;" class="slider" id="slider">
+  	{{#each classes}}
+      <div>
+      Class Title :  <h1 class="hh" id="hh"> {{title}}</h1>
+      Instructor :  <p class="ins" id="ins"> {{instructor}}</p>
+         <a  href="/classes/{{_id}}/details"class="btn btn-primary"><i class="fa fa-plus-square"></i> View Class</a>
+      </div>
+  	{{/each}}
+  
+</div>
+
+
+<canvas id="bar-chart" style="max-height: 400px;max-width: 600px;padding-left: 150px;"></canvas>
+
+<script src="/javascripts/admin.js"></script>
+
+<script>
+  
+   x= $(".hh").toArray();
+
+  ins=$(".ins").toArray();
+
+
+
+   console.log('{{labeli}}');
+  console.log('{{datai}}');
+
+ 
+  var label='{{labeli}}';
+  var detail='{{datai}}';
+  var labels = label.split(',');
+  var detalis=detail.split(',');
+
+  for ( a in detalis ) {
+    
+      detalis[a]=parseInt(detalis[a], 10);
+      console.log(detalis[a]);
+  }
+ 
+
+  new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels:labels,
+      datasets: [
+        {
+          label: "Likes And Dislile for top Classes",
+          backgroundColor: ["#3e95cd", "#8e5ea2"],
+          data: detalis
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Likes And Dislile for top Classes'
+      }
+    }
+});
+
+ 
+</script>
