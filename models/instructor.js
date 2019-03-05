@@ -112,3 +112,7 @@ module.exports.manage=function(info,callback){
 
     
 }
+
+module.exports.countInstructor=function(callback){
+    Instructor.find({}, callback);
+}

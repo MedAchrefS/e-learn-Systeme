@@ -71,3 +71,7 @@ module.exports.saveInstructor=function(newUser,newInstructor,callback){
     });
 }
 
+module.exports.countUsers=function(callback){
+    User.find({}, callback);
+}
+

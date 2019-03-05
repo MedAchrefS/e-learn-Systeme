@@ -4,7 +4,7 @@ var path = require('path');
 Class = require('../models/class');
 Instructor = require('../models/instructor');
 User = require('../models/user');
-
+var Specialite=require('../models/specialite');
 // Multer files and image consiguration && destination
 
 const multer= require('multer');
@@ -48,8 +48,11 @@ router.get('/classes', function(req, res, next){
 
 // creeer un nouveau class get
 router.get('/classes/new', function(req, res, next){
+	Specialite.getSpecialite(function(err,specialite){
+		if(err) throw err;
+		res.render('instructor/newclasses',{specialite:specialite});
+	})
 	
-		res.render('instructor/newclasses');
 
 });
 
@@ -60,18 +63,19 @@ router.post('/classes/new', function(req, res, next){
 	info['title'] = req.body.title;
 	info['description'] = req.body.description;
 	info['instructor'] =user_object.username;
-	info['lesson_number'] = req.body.lesson_number;
-	info['lesson_title'] = req.body.lesson_title;
-	info['lesson_body'] = req.body.lesson_body;
+	selectedoption=req.body.selected_s;
+	info['specialite']=selectedoption;
+	console.log("////////////////");
+	console.log("aaaaaaaaaaa////////////////aaaaaaaaaaa");
+	console.log(selectedoption);
+	console.log(req.body.lesson_number+": dans le controller");
 
-console.log(req.body.lesson_number+": dans le controller");
-
-	Class.saveClass(info,function(err, class_new){
+	 Class.saveClass(info,function(err, class_new){
 		if(err) throw err;
 		req.flash('success_msg', 'Your class Hase been Created');
-		res.redirect('/instructors/classes');
+		res.redirect('/instructors/manage_classes');
 	});
-	res.redirect('/instructors/classes');
+	res.redirect('/instructors/manage_classes'); 
 
 });
 // inscrire pour un class fonction post

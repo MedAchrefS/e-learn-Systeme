@@ -13,6 +13,11 @@ var ClassSchema= mongoose.Schema({
         type:String,
         required: true
     },
+    specialite:[
+        {
+            specialite_id: {type: String}
+        }
+    ],
     lessons:[
         {
             lesson_number:{ type: Number},
@@ -84,33 +89,24 @@ module.exports.addLesson = function(info, callback){
 
 module.exports.saveClass=function(infoclass){
 console.log('achref');
-        Class.title=infoclass['title'];
-        Class.description=infoclass['description'];
-        Class.instructor=infoclass['instructor'];
-        
-        console.log("tttt ;: "+infoclass['instructor']);
-        // variable lesson 
-        lessons=[];
-        lessons['lesson_number']=infoclass['lesson_number'];
-        lessons['lesson_title']=infoclass['lesson_title'];
-        lessons['lesson_body']=infoclass['lesson_body'];
+   var spec =infoclass['specialite'];
+   
 
-        console.log(lessons['lesson_number']);
-        console.log(lessons['lesson_title']);
-        console.log(lessons['lesson_body']);
+   
+    Class.title=infoclass['title'];
+    Class.description=infoclass['description'];
+    Class.instructor=infoclass['instructor'];
+
         // ajouter dans la classe
 
         var newClass = new Class({
             title: infoclass['title'],
             description:infoclass['description'],
             instructor:infoclass['instructor'],
-            lessons:[
-                {
-                    lesson_number:infoclass['lesson_number'],
-                    lesson_title:infoclass['lesson_title'],
-                    lesson_body:infoclass['lesson_body']
-                }
-            ]
+            specialite:{
+                specialite_id:spec
+            }
+
         });
 
         newClass.save(function(error){

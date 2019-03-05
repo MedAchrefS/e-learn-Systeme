@@ -122,3 +122,7 @@ module.exports.manage=function(info,callback){
 
     
 }
+
+module.exports.countStudent=function(callback){
+    Student.find({},callback);
+}

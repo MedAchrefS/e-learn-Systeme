@@ -4,6 +4,7 @@ var router = express.Router();
 var Class= require('../models/class');
 var Instructor=require('../models/instructor');
 var User=require('../models/user');
+var Specialite=require('../models/specialite');
 /*classes page . */
 
 router.get('/', function(req, res, next) {
@@ -35,10 +36,42 @@ router.get('/:id/details', function(req, res, next) {
 			   console.log(dislike+" :like are");
 			} 
 			Instructor.getInstructorByUsername(classname.instructor,function(err,instructor){
-				console.log("---**tatatatat*"+user_object.avater_name+"*tatata-----**");
-				user_avatar=user_object.avater_name;
+			var user_avatar;
+				if (typeof user_object == "undefined") {
+					user_avatar=null;
+				}
+				else if(user_object==null){
+					user_avatar==null;
+				}else{
+					user_avatar=user_object.avater_name;
+				}
+			console.log(classname.specialite[0].specialite_id+" le id du speciiii");
+			var array = classname.specialite[0].specialite_id.split(',');
+			
+			console.log("///////////////////////");
+		var tab_spec_nom=[];
+		c=0;
+				array.forEach(element => {
+					console.log(element);
+					Specialite.getSpecialiteById(element,function(err,specialite){
+						console.log("///////////////////////");
+						console.log("///////////////////////");
+						console.log(specialite);
+						console.log("///////////////////////");
+						console.log("///////////////////////");
+						tab_spec_nom[c]=specialite;
+						
+						c++;
+					});
+				});
+			
+					
+			
+			res.render('classes/details', { class: classname,
+				instructor:instructor, likes: likes,dislike: dislike,
+				user_avatar:user_avatar, specialite:tab_spec_nom});
 
-				res.render('classes/details', { class: classname, instructor:instructor, likes: likes,dislike: dislike, user_avatar:user_avatar });
+	
 			});
 			
 		});

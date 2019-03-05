@@ -1,3 +1,5 @@
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 <h2>Add new Classes</h2>
 
       <form action="/{{user}}s/classes/new" method="POST">
@@ -7,22 +9,28 @@
              <br>
             <label for="description">description :</label>
              <br>
-            <input type="text" name="description">
+            <input type="text" class="form-control" name="description">
              <br>
-            <input type="hidden" name="instructor" value="{{user}}">
+            <input type="hidden" class="form-control" name="instructor" value="{{user}}">
             
-            <label for="lesson_number">lesson number :</label>
-             <br>
-            <input type="text" name="lesson_number" >
-             <br>
-             <label for="lesson_title">lesson title :</label>
-              <br>
-             <input type="text" name="lesson_title" >
-              <br>
-              <label for="lesson_body">lesson body :</label>
-               <br>
-              <input type="text" name="lesson_body" >
+          <div class="container">
+                  <strong>Select Language:   </strong>
+                  <select class="form-control" name="selected_s" id="multiple-checkboxes" multiple="multiple">
+                        {{#each specialite}} 
+                               <option name="selected_s" value="{{_id}}">
+                                     {{nom_specialite}}
+                               </option>
+                        {{/each}}
+                      
+                  </select>
+             </div>
 
              <br>
             <input type="submit" name="submit" class="button red pill" >
         </form>
+
+      <script type="text/javascript">
+            $(document).ready(function() {
+                  $('#multiple-checkboxes').multiselect();
+            });
+      </script>
