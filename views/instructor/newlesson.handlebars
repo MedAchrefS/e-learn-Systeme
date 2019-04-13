@@ -1,3 +1,4 @@
+
 <h2>Add Lessions</h2>
 
 <form 
@@ -5,29 +6,29 @@
     action="/instructors/classes/{{class_id}}/lessons/new"
 	enctype="multipart/form-data">
 	
-	<div>
+	<div class="form-group">
 		<label>Lesson number: </label>
-		<input type="text" name="lesson_number">
+		<input style="max-width: 250px;" class="form-control" type="text" name="lesson_number">
 	</div><br />
 
-    <div>
+    <div class="form-group">
 		<label>Lesson Title: </label>
-		<input type="text" name="lesson_title">
+		<input style="max-width: 250px;" class="form-control" type="text" name="lesson_title">
 	</div><br />
 
-    <div>
+    <div class="form-group">
 		<label>Lesson body: </label>
-		<textarea type="text" name="lesson_body"></textarea>
+		<textarea style="max-width: 650px; max-height: 400px; min-height: 350px;" class="form-control" type="text" name="lesson_body"></textarea>
 	</div><br />
 
-	<div class="block">
-		<label for="">Upload a File :</label>
+	<div class="form-group">
+		<label for=""> <b>Upload a File :</b> </label>
 		 <div class="row">
-             <input type="file" name="lesson_file" />
+             <input style="max-width: 250px;" class="form-control" type="file" name="lesson_file" />
           </div>
 	</div>
 	
-	<div>
-		<input type="submit" value="ADD Lesson ">
+	<div class="form-group" style="width: 600px;">
+		<input style="float: right;" class="btn btn-primary" type="submit" value="ADD Lesson ">
 	</div>
 </form>

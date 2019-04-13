@@ -42,6 +42,11 @@ router.get('/games/math_game', function(req, res, next) {
 	
 	res.render('Games/math_game');
 });
+router.get('/games/quizMath', function(req, res, next) {
+	
+	res.render('Games/quizMath');
+});
+
 
 
 router.post('/search', function(req, res, next) {

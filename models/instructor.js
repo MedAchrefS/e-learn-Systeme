@@ -29,7 +29,8 @@ var InstructorSchema= mongoose.Schema({
     },
     classes:[{
         class_id:{type: [mongoose.Schema.Types.ObjectId]},
-        class_title: {type: String}
+        class_title: {type: String},
+        LastViewedLesson:{type: Number}
     }],
     gender:{
         type:String
@@ -55,6 +56,18 @@ module.exports.getInstructorclasses=function(username, callback){
 
 }
 
+// classes registered by the instructor
+module.exports.getInstructorRegisteredclasses=function(username, callback){
+    
+    console.log("aaaaa ttttt");
+    var query={username: username};
+    Instructor.findOne(query,callback);
+
+
+
+}
+
+
 //Register Instructor for a class
 module.exports.register=function(info,callback){
     instructor_username= info['instructor_username'];
@@ -63,7 +76,7 @@ module.exports.register=function(info,callback){
     var query={username: instructor_username};
     Instructor.findOneAndUpdate(
         query,
-        {$push:{"classes":{ class_id:class_id, class_title:class_title } } },
+        {$push:{"classes":{ class_id:class_id, class_title:class_title, LastViewedLesson:1 } } },
         {safe: true, upsert: true},
         callback
     );
@@ -115,4 +128,40 @@ module.exports.manage=function(info,callback){
 
 module.exports.countInstructor=function(callback){
     Instructor.find({}, callback);
+}
+
+module.exports.LastViewedLesson=function(user_id,lesson_number,class_id,class_title,callback){
+   // console.log(classname.title+"class model title ????");
+    console.log("class id @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+class_id+"@@@@@@@@");
+
+    Instructor.getInstructorRegisteredclasses("ahmed",function(err, classname){
+             if (err) return callback(err);
+       // console.log(classname+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+               
+
+                classname.classes.forEach(c => {
+                    console.log(c);
+                    console.log("|||||||||||||||||||||||||||||||");
+                    console.log("le class id est egale a || "+c.class_id+" ||||||");
+                    if(class_id.equals(c.class_id.toString())){
+
+                        var query={_id: user_id,"classes.class_id":class_id};
+                        console.log("true");
+                        Instructor.findOneAndUpdate(
+                            query,
+                            {$set:{"classes":{class_id:class_id, class_title:class_title,
+                             LastViewedLesson:lesson_number} } },
+                            {safe: true, upsert: true},
+                            callback
+                            ); 
+                    }else{
+                        console.log("false");
+                    }
+                });
+
+              
+      
+       
+ 
+    });
 }

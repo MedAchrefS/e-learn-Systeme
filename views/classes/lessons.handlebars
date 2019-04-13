@@ -1,14 +1,14 @@
-    <h2>   {{class.title}} 's Classes lessons </h2>
+    <h2>   {{class.title}} 's Classes lessons Regesterd</h2>
 
-    <table cellspacing="0" cellpadding="0"> 
+    <table class="table table-bordered" cellspacing="0" cellpadding="0"> 
         <thead> 
             <tr>
+                <th scope="col">Lesson Id</th>
+                <th scope="col">Lesson Title</th>
+                <th scope="col">lesson body</th>
+                <th>Instructor</th>
                 <th>Lesson Id</th>
-                <th>Lesson Title</th>
-                <th>lesson body</th>
-                <th>  Lesson File  </th>
-           
-                <th></th>
+                <th scope="col">  Lesson File  </th>
                
             </tr>
         </thead>
@@ -18,7 +18,8 @@
                     <td>{{lesson_number}}</td>
                     <td> {{lesson_title}}</td>
                     <td> {{lesson_body}}</td>
-                     
+                     <td>{{../class.instructor}}</td>
+                     <TD>{{_id}}</TD>
                     <td><a href="/classes/ttt/{{../class._id}}/lesson/{{lesson_number}}">View Lesson File</a></td>
                   
                 </tr>

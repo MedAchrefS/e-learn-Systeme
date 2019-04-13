@@ -1,18 +1,24 @@
 <h2>Update Classe {{class_.title}}</h2>
+  <div style="max-width: 700px;" class="container">
 
+    
       <form action="/{{user}}s/classes/{{class_._id}}/update" method="POST">
+          <div class="form-group">
             <label for="title">title :</label>
-            <br>
-            <input type="text" name="title" placeholder="old title is: {{class_.title}}" value="{{class_.title}}">
-             <br>
-            <label for="description">description :</label>
-             <br>
-            <input type="text" name="description" placeholder="old description is : {{class_.description}}" value="{{class_.description}}" >
-             <br>
-            <input type="hidden" name="instructor" value="{{user}}">
+           
+            <input  class="form-control" type="text" name="title" placeholder="old title is: {{class_.title}}" value="{{class_.title}}">
+          </div>
             
-      
-        
-            
-            <input type="submit" name="submit" class="button red pill" >
-        </form>
+             <br>
+             <div class="form-group">
+                  <label for="description">description :</label>
+                  <br>
+                  <input class="form-control" type="text" name="description" placeholder="old description is : {{class_.description}}" value="{{class_.description}}" >
+                  <br>
+                  <input type="hidden" name="instructor" value="{{user}}">
+             </div>
+           
+           
+            <input style="float: right;" type="submit" name="submit" class="btn btn-primary" >
+        </form> 
+ </div>

@@ -1,89 +1,116 @@
 
-<h2>Manage Account Student</h2>
 <form action="/{{user}}s/manage" method="POST" name="f" enctype="multipart/form-data">
-		<div class="portfoliocard">
-		<div class="coverphoto">
-      
-    </div>
-		<div class="profile_picture">
-       <img name="avatar" style="border-radius: 20%; max-height: 140px; min-width: 130px;  " src="/images/avatars/{{avatar}}" alt="avatar">
-    </div>
-		<div class="left_col">
-			<div class="followers">
-				<div class="follow_count">18,541</div>
-				Followers
-			</div>
-			<div class="following">
-				<div class="follow_count">181</div>
-				Following
-			</div>
-		</div>
-		<div class="right_col">
-			<h2 class="name">{{student.first_name}}</h2>
-			<h3 class="location"> {{student.last_name}}</h3>
-             
-			<ul class="contact_information">
-				<li class="work">adresse</li>
-				<li class="website"><a class="nostyle" href="#">{{student.adresse.[0].street_address}}</a></li>
-				<li class="mail">{{student.adresse.[0].city}}</li>
-				<li class="phone">{{student.adresse.[0].state}}</li>
-             
-				<li class="resume"><a href="#" class="nostyle">{{student.adresse.[0].zip}}</a></li>
-                   <li class="mail">{{student.email}}</li>
-			</ul>
-           
-		</div>
-		</div>
+	
 
-        <div class="container">
-  
-    <div class="row">
-      <h4>Account</h4>
-      <div class="input-group input-group-icon">
-        <input type="text" name="username" value="{{student.username}}" placeholder="{{student.username}}"/>
-        <div class="input-icon"><i class="fa fa-user"></i></div>
-      </div>
-      <div class="input-group input-group-icon">
-        <input type="email" name="student_email" value="{{student.email}}" placeholder="{{student.email}}"/>
-        <div class="input-icon"><i class="fa fa-envelope"></i></div>
-      </div>
-       
+
+<div class="container">
+  <div class="row">
+    <div class="col">
      
+     <!-- profile container on the left  -->
+        	<div class="portfoliocard">
+          <div class="coverphoto">
+            
+          </div>
+          <div class="profile_picture">
+            <img name="avatar" style="border-radius: 20%; max-height: 140px; min-width: 130px;  " src="/images/avatars/{{avatar}}" alt="avatar">
+          </div>
+          <div class="left_col">
+            <div class="followers">
+              <div class="follow_count">18,541</div>
+              Followers
+            </div>
+            <div class="following">
+              <div class="follow_count">181</div>
+              Following
+            </div>
+          </div>
+          <div class="right_col">
+            <h2 class="name">{{student.first_name}}</h2>
+            <h3 class="location"> {{student.last_name}}</h3>
+                  
+            <ul class="contact_information">
+              <li class="work">adresse</li>
+              <li class="website"><a class="nostyle" href="#">{{student.adresse.[0].street_address}}</a></li>
+              <li class="mail">{{student.adresse.[0].city}}</li>
+              <li class="phone">{{student.adresse.[0].state}}</li>
+                  
+              <li class="resume"><a href="#" class="nostyle">{{student.adresse.[0].zip}}</a></li>
+                        <li class="mail">{{student.email}}</li>
+            </ul>
+                
+          </div>
+          </div>
+
+
     </div>
-    <div class="row">
+    <div class="col">
      
-          <div class="row">
-            <input type="date" name="date">
-          </div>
-          <div class="row">
-             <input type="file" id="avatar" name="avatar" OnLoad="LoadValue();"/>
-          </div>
-      <div class="col-half">
-        <h4>Gender</h4>
-        <div class="input-group">
+        <!-- form on the right side -->
 
-          <input type="radio" name="gender" value="male" {{#if male}} checked {{/if}} id="gender-male"/>
-          <label for="gender-male">Male</label>
-          <input type="radio" name="gender" {{#if female}} checked {{/if}} value="female" id="gender-female"/>
-          <label for="gender-female">Female</label>
-   
-        </div>
-      </div>
-    </div>
-    
-    <div class="row">
-      <h4>Terms and Conditions</h4>
-      <div class="input-group">
-        <input type="checkbox" id="terms"/>
-        <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
-      </div>
-    </div>
+          <div class="form-group row" style="margin-top: 50px;">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" name="student_email" value="{{student.email}}" placeholder="{{student.email}}">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">User Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" value="{{student.username}}" placeholder="{{student.username}}">
+              </div>
+            </div>
+            <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" value="male" {{#if male}} checked {{/if}} id="gender-male">
+                    <label class="form-check-label" for="gridRadios1">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" {{#if female}} checked {{/if}} value="female" id="gender-female">
+                    <label class="form-check-label" for="gridRadios2">
+                      Female
+                    </label>
+                  </div>
+                
+                </div>
+              </div>
+            </fieldset>
 
-    <div class="constainer">
-        <input type="submit"  class="red" name="submit" >
+
+
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"> Upload Your Avatar</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="avatar" name="avatar" OnLoad="LoadValue();">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="date" class="col-sm-2 col-form-label">Date OF Birth</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="date" id="date" name="date" >
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <div class="col-sm-10">
+                <input style="float: right;" type="submit" class="btn btn-primary" value="Update">
+              </div>
+            </div>
+
+
+
     </div>
+  </div>
+
   </form>
-</div>
+
 <script language="JavaScript">
 
 function LoadValue() {

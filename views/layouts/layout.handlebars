@@ -25,8 +25,8 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="/">E-Learning</a>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="min-height: 70px;">
+  <a class="navbar-brand"  href="/">E-Learning</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -43,29 +43,6 @@
         <a class="nav-link" href="/games">Our Games</a>
       </li>
 
-		{{#if user_object}}
-		
-			<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Manage 
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					{{#if instructor_var}}
-         <a   href="/{{user}}s/manage_classes" > Manage My Classes</a>
-				   <div class="dropdown-divider"></div>
-				 	<a  href="/{{user}}s/classes/new"> Create Classes</a> 
-					   <div class="dropdown-divider"></div>
-					{{/if}}
-		 <a   href="/{{user}}s/classes"> My Registered Classes</a>          
-          <div class="dropdown-divider"></div>
-				<a  href="/{{user}}s/manage">ManageAccount</a>
-         
-        </div>
-      </li>
-			
- 		{{/if}}
-
-	 
 
 	  <li class="nav-item" style="padding-left: 150px">
 				<form action="/search" method="POST">
@@ -96,11 +73,15 @@
 						</button> -->
 						<input type="image" style="max-height: 50px;max-width: 60px; border-radius: 50%;" src="/images/avatars/{{user_object.avater_name}}" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<a class="dropdown-item" href="#">Something else here</a>
+								{{#if instructor_var}}
+								<a class="dropdown-item"  href="/{{user}}s/manage_classes">Manage My Created Classes</a>
+								<a class="dropdown-item" href="/{{user}}s/classes/new">Create Class</a>
+								{{/if}}
+							
+						
+							<a class="dropdown-item" href="/{{user}}s/classes">My Registered Classes</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
+							<a class="dropdown-item" href="/{{user}}s/manage">My Account</a>
 							<a  class="btn btn-light dropdown-item" href="/users/logout"> logout</a> 
 						</div>
 					</div>

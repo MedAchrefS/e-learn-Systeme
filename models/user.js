@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt= require('bcryptjs');
+var moment = require('moment');
 // user schema
 var UserSchema= mongoose.Schema({
     username: {
@@ -20,6 +21,12 @@ var UserSchema= mongoose.Schema({
         type:String
     },
     avater_name:{
+        type:String
+    },
+    last_login:{
+        type:String
+    },
+    last_logout:{
         type:String
     }
 });
@@ -73,5 +80,18 @@ module.exports.saveInstructor=function(newUser,newInstructor,callback){
 
 module.exports.countUsers=function(callback){
     User.find({}, callback);
+}
+
+module.exports.last_login=function(username,callback){
+    var query={username:username};
+    toda=moment().format("MM ddd, YYYY hh:mm:ss a");
+    User.findOneAndUpdate(query, { last_login: toda }, callback);
+
+}
+module.exports.last_logout=function(username,callback){
+    var query={username:username};
+    toda=moment().format("MM ddd, YYYY hh:mm:ss a");
+    User.findOneAndUpdate(query, { last_logout: toda }, callback);
+
 }
 

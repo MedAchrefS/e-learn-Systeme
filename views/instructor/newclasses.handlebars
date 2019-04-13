@@ -2,20 +2,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 <h2>Add new Classes</h2>
 
-      <form action="/{{user}}s/classes/new" method="POST">
+      <form action="/{{user}}s/classes/new" method="POST" >
+      <div style="max-width: 500px;" class="container">
+
+     
             <label for="title">title :</label>
             <br>
-            <input type="text" name="title">
+            <input style="max-width: 350px;" class="form-control" type="text" name="title" required>
              <br>
             <label for="description">description :</label>
              <br>
-            <input type="text" class="form-control" name="description">
+            <input style="max-width: 350px;" type="text" class="form-control" name="description" required>
              <br>
-            <input type="hidden" class="form-control" name="instructor" value="{{user}}">
+            <input type="hidden"  name="instructor" value="{{user}}" >
             
           <div class="container">
                   <strong>Select Language:   </strong>
-                  <select class="form-control" name="selected_s" id="multiple-checkboxes" multiple="multiple">
+                  <select required style="max-width: 350px;" class="form-control" name="selected_s" id="multiple-checkboxes" multiple="multiple">
                         {{#each specialite}} 
                                <option name="selected_s" value="{{_id}}">
                                      {{nom_specialite}}
@@ -26,9 +29,9 @@
              </div>
 
              <br>
-            <input type="submit" name="submit" class="button red pill" >
+            <input type="submit" name="submit" style="float: right;" class="btn btn-primary" >
         </form>
-
+      </div>
       <script type="text/javascript">
             $(document).ready(function() {
                   $('#multiple-checkboxes').multiselect();

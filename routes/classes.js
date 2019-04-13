@@ -100,7 +100,26 @@ router.get('/ttt/:id/lesson/:lesson_number', function(req, res, next) {
 			if(classname.lessons[i].lesson_number==req.params.lesson_number){
 				lesson=classname.lessons[i];
 			}
-		res.render('classes/file', { class: classname ,lesson: lesson});
+			
+			if(user_object.user=="instructor"){
+				console.log("@@@@@@@@@@@@@@@@@@");
+				console.log(instructor_object.classes);
+				console.log("achref rrr");
+				Instructor.LastViewedLesson(instructor_object._id,req.params.lesson_number,
+					classname._id,classname.title	
+					,function(err,lesson){
+					console.log("updated Instructor"+lesson);
+				});
+			}
+		/* 	if(user_object.user.trim() =="instructor"){
+				Instructor.LastViewedLesson(user_object._id,classname._id,function(){
+						console.log(user_object._id+"id user @@@@");
+						console.log(classname._id+"id Class @@@@");
+						res.render('classes/file', { class: classname ,lesson: lesson});
+					});
+			} */
+
+	
 	});
 });
 

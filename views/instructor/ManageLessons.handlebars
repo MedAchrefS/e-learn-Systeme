@@ -1,0 +1,25 @@
+    <h2>   {{class.title}} 's Classes lessons </h2>
+
+    <table class="table table-bordered" cellspacing="0" cellpadding="0"> 
+        <thead> 
+            <tr class="table-primary">
+                <th scope="col">Lesson Id</th>
+                <th scope="col">Lesson Title</th>
+                <th scope="col">lesson body</th>
+                <th scope="col"> Lesson File  </th>
+     
+            </tr>
+        </thead>
+        <tbody> 
+            {{#each class.lessons}}
+                <tr>
+                    <td>{{lesson_number}}</td>
+                    <td> {{lesson_title}}</td>
+                    <td> {{lesson_body}}</td>
+                     
+                    <td><a href="/classes/ttt/{{../class._id}}/lesson/{{lesson_number}}">View Lesson File</a></td>
+                  
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>

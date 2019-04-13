@@ -114,12 +114,15 @@ passport.deserializeUser(function(id, done) {
     user_object=req.user;
    console.log(usertype+' : ceci est le type');
 
+
     if(usertype=="student"){
       Student.getStudentByUserneme(req.user.username,function(err,student){
           if(err)throw err;
           student_object=student;
+              User.last_login(req.user.username,function(err,user){
+                res.redirect('/'+usertype+'s/classes');
+              });
           
-          res.redirect('/'+usertype+'s/classes');
       });
     }else if(usertype=="admin"){
       res.redirect('/'+usertype+'/index');
@@ -128,8 +131,10 @@ passport.deserializeUser(function(id, done) {
       Instructor.getInstructorByUsername(req.user.username,function(err,instructor){
         if(err)throw err;
         instructor_object=instructor;
-        
-        res.redirect('/'+usertype+'s/classes');
+            User.last_login(req.user.username,function(err,user){
+              res.redirect('/'+usertype+'s/classes');
+            });
+       
     });
       
     }
@@ -162,10 +167,16 @@ passport.deserializeUser(function(id, done) {
 // Log out function
 
     router.get('/logout',function(req,res){
+      console.log(req.user);
+      User.last_logout(req.user.username,function(err,user){
+        
+      });
       req.logout();
       user_object=null;
+      console.log(req.user);
       req.flash('success_msg',"You Are Logged Out ,Please come back soon");
       res.redirect('/');
+
     });
 
 module.exports = router;

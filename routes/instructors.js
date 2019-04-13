@@ -94,6 +94,16 @@ router.post('/classes/register', function(req, res){
 	res.redirect('/instructors/classes');
 });
 
+// Manage Lessons of class id function get
+router.get('/classes/:id/lessons', function(req, res, next){
+	
+	Class.getClassById([req.params.id],function(err, classname){
+        if(err)throw err;
+		res.render('instructor/ManageLessons', { class: classname });
+	});
+});
+
+
 // nouveau lesson GET Runder function
 router.get('/classes/:id/lessons/new', function(req, res, next){
 	res.render('instructor/newlesson',{class_id:req.params.id});
